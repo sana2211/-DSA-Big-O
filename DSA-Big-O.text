@@ -1,11 +1,11 @@
 1. What is the Big O for this?
 1) Determine the Big O for the following algorithm: You are sitting in a room with 15 people. You want to find a playmate for your dog, preferably of the same breed. So you want to know if anyone out of the 15 people have the same breed as your dog. You stand up and yell out, who here has a golden retriever and would like to be a playdate for my golden. Someone yells - "I do, be happy to bring him over"
 
->>>  O(log n)
+>>>  O(log n)No matter the number of people in the room you only have to yell once.
 
 2) Determine the Big O for the following algorithm: You are sitting in a room with 15 people. You want to find a playmate for your dog who is of the same breed. So you want to know if anyone out of the 15 people have the same breed as your dog. You start with the first person and ask him if he has a golden retriever. He says no, then you ask the next person, and the next, and the next until you find someone who has a golden or there is no one else to ask.
 
->>>> O(n)
+>>>> O(n)You will have to ask once for each person in the room.
 
 2. Even or odd
 What is the Big O of the following algorithm? Explain your answer
@@ -19,7 +19,12 @@ function isEven(value) {
     }
 }
 
->>>> O(1) -- it checks the value once no matter what the value is
+>>>> O(1) -- it checks the value once no matter what the value is.
+The function only accepts input of size (1) and its time on directly porpotinal to the value
+ Constant run time complexity.
+Reasoning: Because you're only ever taking one value, there is no "loop" to go through. 
+Even as the value gets bigger, you simply divide it by 2 and see whether it returns an integer or a float.
+*/
 
 
 3. Are you here?
@@ -37,6 +42,17 @@ function areYouHere(arr1, arr2) {
 }
 
 >>>> O(nˆ2) -- it has a loop nested within a loop 
+It has two levels of loops which exponentally increases the time to complete.
+Answer: O(n^2). Quadratic run time complexity.
+Reasoning: For each run through the first loop, you have to run through the entire second loop.
+If you add even just one more item to `arr1`, you have to run another full loop through `arr2`.
+So it's quadratic because as N doubles (taking N as `arr1.length` or `arr2.length`), the time it takes
+will increase exponentially (N * N).
+UPDATE: As per the comments below, the above answer assumes somewhat naively that the two arrays would have the same lengths.
+It's quite likely that they don't have the same lengths; therefore the complexity would be in fact O(n*m) instead of O(n^2).
+*/
+
+
 
 4. Doubler
 What is the Big O of the following algorithm? Explain your answer
@@ -47,9 +63,13 @@ function doubleArrayValues(array) {
     }
     return array;
 }
-
->>>> O(n) - it takes as long as the length of the array
-
+answer: O(n) The time it takes to complete the function is directly perportinal to the input. Another way to think of it is that since it is one loop it's also O(n^1).
+ - it takes as long as the length of the array
+Linear run time complexity.
+Reasoning: As `array.length` increases, the number of iterations increases at the same rate.
+This is because you don't have to loop any more than once: however many items are in the array
+is how many times you run the function.
+*/
 5. Naive search
 What is the Big O of the following algorithm? Explain your answer
 
@@ -61,8 +81,12 @@ function naiveSearch(array, item) {
     }
 }
 
->>>> O(log n) - the process stops as soon as the conditions are met
-
+>>>> O(log n) - the process stops as soon as the conditions are met.
+In a worst case situation the function would have to iterate through the entire array once to find the correct item.
+ Linear run time complexity.
+Reasoning: Same as above with the doubler. You have to check each and every item once and only once
+in order to determine whether you've got a match.
+*/
 6. Creating pairs:
 What is the Big O of the following algorithm? Explain your answer
 
@@ -75,7 +99,12 @@ function createPairs(arr) {
 }
 
 >>>> O(nˆ2) - it's a loop within a loop
-
+it has two loops which increases the time exponetualy
+Quadratic run time complexity.
+Reasoning: The first loop has O(n) complexity, as with each new addition, the number of times
+you run through the loop increases by one. As the inner loop also has O(n) complexity, together they have 
+quadratic run time complexity.
+*/
 7. Compute the sequence
 What does the following algorithm do? What is its runtime complexity? Explain your answer
 
@@ -97,6 +126,7 @@ function compute(num) {
 }
 
 >>>> it returns an array of numbers whose length is equal to num and values are the sum of the last two numbers before it. Its runtime complexity is O(n)
+answer: It counts odd numbers up to the input number. The runtime complexity is O(n). I thas one loop and the complexity increases with the size of the number in input.
 
 8. An efficient search
 In this example, we return to the problem of searching using a more sophisticated approach than in naive search, above. Assume that the input array is always sorted. What is the Big O of the following algorithm? Explain your answer
@@ -125,6 +155,11 @@ function efficientSearch(array, item) {
 }
 
 >>>> O(n log n) - it does log n a few times before meeting the conditions
+The function splits the input in half at each iteration.
+Logarithmic run time complexity.
+Reasoning: Cutting `array.length` in half in each iteration, the time complexity increases slowly, in a logarithmic fashion.
+*/
+
 
 9. Random element
 What is the Big O of the following algorithm? Explain your answer
@@ -134,6 +169,10 @@ function findRandomElement(arr) {
 }
 
 O(n) -- it's a simple search that doesn't exceed the array's length
+answer: O(1) No matter how large the array it will only take one pass to find a random item from the list.
+Constant run time complexity.
+Reasoning: With no iteration occurring, selecting an element at random from an array has constant time complexity.
+*/
 
 10. What Am I?
 What does the following algorithm do? What is the Big O of the following algorithm? Explain your answer
@@ -149,6 +188,7 @@ function isWhat(n) {
 }
 
 >>> function returns true if n is a prime number. It's an O(n) because the process repeats by 'n' times, depending on the value of the input.
+answer: Finds prime numbers. The big O notation is O(n). It has to go through all numbers until it gets to the input number.
 
 11. Tower of Hanoi
 The Tower of Hanoi is a very famous mathematical puzzle (some call it game!). This is how it goes:
